@@ -29,6 +29,8 @@ CannedACLStrings = ['private', 'public-read',
 
 class Policy:
 
+    NameSpace = 'xmlns="http://s3.amazonaws.com/doc/2006-03-01/"'
+
     def __init__(self, parent=None):
         self.parent = parent
         self.acl = None
@@ -67,7 +69,7 @@ class Policy:
             setattr(self, name, value)
 
     def to_xml(self):
-        s = '<AccessControlPolicy>'
+        s = '<AccessControlPolicy %s>' % self.NameSpace
         s += self.owner.to_xml()
         s += self.acl.to_xml()
         s += '</AccessControlPolicy>'
